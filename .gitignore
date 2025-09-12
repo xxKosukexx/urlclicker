@@ -12,6 +12,7 @@
 
 # Ignore all logfiles and tempfiles.
 /log/*
+/api/log/*
 /tmp/*
 !/log/.keep
 !/tmp/.keep

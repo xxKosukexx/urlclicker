@@ -1,2 +1,4 @@
-port ENV.fetch("PORT", 3000)
-bind "tcp://0.0.0.0:3000"
+# frozen_string_literal: true
+
+port ENV.fetch('PORT', 3000)
+bind 'tcp://0.0.0.0:3000'

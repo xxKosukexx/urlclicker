@@ -1,14 +1,17 @@
-source "https://rubygems.org"
-ruby "3.3.0"
+# frozen_string_literal: true
 
-gem "rails", "~> 7.1"
-gem "pg", "~> 1.5"
-gem "puma"
-gem "rack-attack"   # 任意（レート制限）
-gem "rack-cors"     # CORS有効化
-gem "bootsnap", require: false
+source 'https://rubygems.org'
+ruby '3.3.0'
+
+gem 'bootsnap', require: false
+gem 'pg', '~> 1.5'
+gem 'puma'
+gem 'rack-attack'   # 任意（レート制限）
+gem 'rack-cors'     # CORS有効化
+gem 'rails', '~> 7.1'
 
 group :development, :test do
-  gem "rspec-rails"
+  gem 'rspec-rails'
 end
 
+gem 'rubocop', '~> 1.80', group: :development

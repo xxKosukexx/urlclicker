@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RedirectsController < ApplicationController
   def show
     link = Link.find_by!(slug: params[:slug])
@@ -8,6 +10,6 @@ class RedirectsController < ApplicationController
       referrer: request.referer,
       visitor_id: cookies[:vid]
     )
-    redirect_to link.original_url, allow_other_host: true
+    redirect_to link.original_url, allow_other_host: true 
   end
 end
