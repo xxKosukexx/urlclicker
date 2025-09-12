@@ -34,3 +34,65 @@ Started GET "/icon.png" for 192.168.65.1 at 2025-09-11 11:35:19 +0000
   
 ActionController::RoutingError (No route matches [GET] "/icon.png"):
   
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5587291661605771635)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Urlclicker'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (3.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Urlclicker'*/[0m
+Migrating to CreateLinks (20250911142111)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Urlclicker'*/[0m
+  [1m[35m (17.7ms)[0m  [1m[35mCREATE TABLE "links" ("id" bigserial primary key, "slug" character varying, "original_url" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Urlclicker'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20250911142111') RETURNING "version" /*application='Urlclicker'*/[0m
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT /*application='Urlclicker'*/[0m
+Migrating to CreateClickEvents (20250911142134)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='Urlclicker'*/[0m
+  [1m[35m (5.1ms)[0m  [1m[35mCREATE TABLE "click_events" ("id" bigserial primary key, "link_id" bigint NOT NULL, "ip_hash" character varying, "user_agent" text, "referrer" text, "visitor_id" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_71035409fb"
+FOREIGN KEY ("link_id")
+  REFERENCES "links" ("id")
+) /*application='Urlclicker'*/[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE INDEX "index_click_events_on_link_id" ON "click_events" ("link_id") /*application='Urlclicker'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20250911142134') RETURNING "version" /*application='Urlclicker'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='Urlclicker'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(5587291661605771635)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Urlclicker'*/[0m
+Started POST "/api/links" for 192.168.65.1 at 2025-09-11 14:29:47 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Urlclicker'*/[0m
+Processing by Api::LinksController#create as */*
+  Parameters: {"original_url"=>"https://eee.com", "link"=>{"original_url"=>"https://eee.com"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*action='create',application='Urlclicker',controller='links'*/[0m
+  ↳ app/controllers/api/links_controller.rb:3:in `create'
+  [1m[36mLink Exists? (3.7ms)[0m  [1m[34mSELECT 1 AS one FROM "links" WHERE "links"."slug" = 'u5yzpp' LIMIT 1 /*action='create',application='Urlclicker',controller='links'*/[0m
+  ↳ app/controllers/api/links_controller.rb:3:in `create'
+  [1m[36mLink Create (1.5ms)[0m  [1m[32mINSERT INTO "links" ("slug", "original_url", "created_at", "updated_at") VALUES ('u5yzpp', 'https://eee.com', '2025-09-11 14:29:47.621013', '2025-09-11 14:29:47.621013') RETURNING "id" /*action='create',application='Urlclicker',controller='links'*/[0m
+  ↳ app/controllers/api/links_controller.rb:3:in `create'
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mCOMMIT /*action='create',application='Urlclicker',controller='links'*/[0m
+  ↳ app/controllers/api/links_controller.rb:3:in `create'
+Completed 200 OK in 71ms (Views: 0.1ms | ActiveRecord: 74.6ms (2 queries, 0 cached) | GC: 1.9ms)
+
+
+Started POST "/api/links" for 192.168.65.1 at 2025-09-11 14:29:56 +0000
+Processing by Api::LinksController#create as */*
+  Parameters: {"original_url"=>"https://eee.com", "link"=>{"original_url"=>"https://eee.com"}}
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[35mBEGIN /*action='create',application='Urlclicker',controller='links'*/[0m
+  ↳ app/controllers/api/links_controller.rb:3:in `create'
+  [1m[36mLink Exists? (4.6ms)[0m  [1m[34mSELECT 1 AS one FROM "links" WHERE "links"."slug" = 'MAVizu' LIMIT 1 /*action='create',application='Urlclicker',controller='links'*/[0m
+  ↳ app/controllers/api/links_controller.rb:3:in `create'
+  [1m[36mLink Create (0.5ms)[0m  [1m[32mINSERT INTO "links" ("slug", "original_url", "created_at", "updated_at") VALUES ('MAVizu', 'https://eee.com', '2025-09-11 14:29:56.254658', '2025-09-11 14:29:56.254658') RETURNING "id" /*action='create',application='Urlclicker',controller='links'*/[0m
+  ↳ app/controllers/api/links_controller.rb:3:in `create'
+  [1m[36mTRANSACTION (1.5ms)[0m  [1m[35mCOMMIT /*action='create',application='Urlclicker',controller='links'*/[0m
+  ↳ app/controllers/api/links_controller.rb:3:in `create'
+Completed 200 OK in 33ms (Views: 0.7ms | ActiveRecord: 8.2ms (2 queries, 0 cached) | GC: 1.6ms)
+
+
+Started POST "/api/links" for 192.168.65.1 at 2025-09-12 09:37:52 +0000
+Processing by Api::LinksController#create as */*
+  Parameters: {"original_url"=>"http://localhost:3001/aaa.com", "link"=>{"original_url"=>"http://localhost:3001/aaa.com"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*action='create',application='Urlclicker',controller='links'*/[0m
+  ↳ app/controllers/api/links_controller.rb:3:in `create'
+  [1m[36mLink Exists? (5.4ms)[0m  [1m[34mSELECT 1 AS one FROM "links" WHERE "links"."slug" = 'oyLidS' LIMIT 1 /*action='create',application='Urlclicker',controller='links'*/[0m
+  ↳ app/controllers/api/links_controller.rb:3:in `create'
+  [1m[36mLink Create (1.3ms)[0m  [1m[32mINSERT INTO "links" ("slug", "original_url", "created_at", "updated_at") VALUES ('oyLidS', 'http://localhost:3001/aaa.com', '2025-09-12 09:37:52.876735', '2025-09-12 09:37:52.876735') RETURNING "id" /*action='create',application='Urlclicker',controller='links'*/[0m
+  ↳ app/controllers/api/links_controller.rb:3:in `create'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT /*action='create',application='Urlclicker',controller='links'*/[0m
+  ↳ app/controllers/api/links_controller.rb:3:in `create'
+Completed 200 OK in 155ms (Views: 2.6ms | ActiveRecord: 21.4ms (2 queries, 0 cached) | GC: 0.0ms)
+
+

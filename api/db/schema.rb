@@ -10,8 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 0) do
+ActiveRecord::Schema[7.2].define(version: 2025_09_11_142134) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "click_events", force: :cascade do |t|
+    t.bigint "link_id", null: false
+    t.string "ip_hash"
+    t.text "user_agent"
+    t.text "referrer"
+    t.string "visitor_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["link_id"], name: "index_click_events_on_link_id"
+  end
+
+  create_table "links", force: :cascade do |t|
+    t.string "slug"
+    t.text "original_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "click_events", "links"
 end
