@@ -1,1 +1,8 @@
 inherit_from: .rubocop_todo.yml
+
+AllCops:
+  NewCops: enable
+Layout/IndentationWidth:
+  Width: 2
+Layout/IndentationConsistency:
+  EnforcedStyle: normal
